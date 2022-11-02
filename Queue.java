@@ -16,8 +16,10 @@ public class Queue{
 		}
 	}
 
+	//hello
+
 	public void enqueue(int val){
-		Node v = new Node(val,null,null);
+		Node v = new Node(val,null);
 		if (head == null){
 			head = v;
 			tail = v;
