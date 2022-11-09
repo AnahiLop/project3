@@ -1,8 +1,17 @@
+import java.io.*;
+import java.util.Scanner;
+
 public class CapGain{
 	private double totCapGain;
-	private Queue sharesHeld;
+	public Queue sharesHeld;
+	//private Queue pricesHeld;
 
-	public static void main(String[] args){
+	public CapGain(){
+		totCapGain = 0;
+		sharesHeld = new Queue();
+	}
+
+	public void mainMenuPrompt(){
 		System.out.println("Welcome to the main menu:");
 		System.out.println("1. Buy");
 		System.out.println("2. Sell");
@@ -11,15 +20,62 @@ public class CapGain{
 
 	}
 	public void buy(int numShares, double price){
-		Node buy = new Node(numShares, price, null);
-		sharesHeld.enqueue(buy);
-
+		for(int i = 0; i < numShares; i ++){
+			sharesHeld.enqueue(price);
+		}
 	}
 
 	public void sell(int numShares, double price){
-		sharesHeld.dequeue();
+		if (sharesHeld.Empty()){
+			System.out.println("Sorry, you have ZERO shares to sell.");
+		}
+		else if(numShares > sharesHeld.size()){
+			System.out.println("Sorry, you dont have enough shares to sell.");
+		}
+
+		else{
+			double salePrice = numShares * price;
+			double total = 0; 
+			for(int i = 0; i < numShares; i++){
+				double hold = price - sharesHeld.dequeue();
+				salePrice = (numShares * hold);
+			}
+			totCapGain = totCapGain + salePrice;
+		}
+		//System.out.println(totCapGain);
+		
 	}
 	public double getTotalCapGain(){
 		return totCapGain;
+	}
+}
+
+class CapGainApp{
+	public static void main(String[] args){
+		Scanner s = new Scanner(System.in);
+		//s.mainMenuPrompt();
+		CapGain cg = new CapGain();
+
+		
+		// cg.buy(10,20);
+		// cg.buy(5,10);
+		// cg.sharesHeld.display();
+		// System.out.println(" ");
+		// cg.sell(8,15);
+		// cg.sharesHeld.display();
+		// System.out.println(" ");
+		// cg.sell(3,25);
+		// cg.sharesHeld.display();
+		// cg.sell(3,30);
+		// cg.sharesHeld.display();
+		// System.out.println(" ");
+		// cg.sell(1,5);
+		// cg.sharesHeld.display();
+		// System.out.println(" ");
+		// cg.sell(2,5);
+		// cg.sharesHeld.display();
+		// System.out.println(" ");
+		// System.out.println(cg.getTotalCapGain());
+
 	}
 }
