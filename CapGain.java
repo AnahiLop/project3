@@ -1,5 +1,5 @@
 import java.io.*;
-import java.util.Scanner;
+import java.util.*;
 
 public class CapGain{
 	private double totCapGain;
@@ -53,10 +53,44 @@ public class CapGain{
 class CapGainApp{
 	public static void main(String[] args){
 		Scanner s = new Scanner(System.in);
-		//s.mainMenuPrompt();
 		CapGain cg = new CapGain();
+		do{
+			cg.mainMenuPrompt();
+			System.out.println("Please select one option: ");
+			String answer = s.nextLine();
+			if( answer == "1"){
+				System.out.println("Please insert shares: ");
+				String shares = s.nextLine();
+				int giveShares = Integer.valueOf(shares);
+				System.out.println("Please insert price: ");
+				String givePrice = s.nextLine();
+				double gPrice = Double.valueOf(givePrice);
+				cg.buy(giveShares,gPrice);
+				cg.sharesHeld.display();
+			}
+			else if(answer == "2"){
+				System.out.println("Please insert shares: ");
+				String shares = s.nextLine();
+				int giveShares = Integer.valueOf(shares);
+				System.out.println("Please insert price: ");
+				String givePrice = s.nextLine();
+				double gPrice = Double.valueOf(givePrice);
+				cg.sell(giveShares,gPrice);
+				cg.sharesHeld.display();
+			}
 
-		
+			else if (answer == "3"){
+				System.out.println("This is your total capital gain so far:");
+				System.out.println(cg.getTotalCapGain());
+			}
+
+			else{
+				System.out.println("Okay, Good Bye :)");
+			}
+		} while (answer == "1" || answer == "2" || answer == "3");
+	}
+}
+			
 		// cg.buy(10,20);
 		// cg.buy(5,10);
 		// cg.sharesHeld.display();
@@ -76,6 +110,3 @@ class CapGainApp{
 		// cg.sharesHeld.display();
 		// System.out.println(" ");
 		// System.out.println(cg.getTotalCapGain());
-
-	}
-}
